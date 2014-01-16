@@ -1,0 +1,46 @@
+/*
+* 2007-2014 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Academic Free License (AFL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/afl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author PrestaShop SA <contact@prestashop.com>
+*  @copyright  2007-2014 PrestaShop SA
+*  @version  Release: $Revision: 9844 $
+*  @license	http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*/
+
+#fidbag_title {font-size:1.2em}
+#fidbag_menuTab {float:left;padding:0;margin:0;margin-left:10px;text-align:center;}
+#fidbag_menuTab li {margin-left:-1px;text-align:left;float:left;display:inline;padding:5px 10px;background:#EFEFEF;font-weight:bold;cursor:pointer;border:1px solid #CCCCCC;-webkit-border-radius: 0px 5px 0px 0px;border-radius: 0px 5px 0px 0px}
+#fidbag_menuTab li.fidbag_menuTabButton.selected {background:#FEF6DD;border-bottom:1px solid #FEF6DD;}
+#fidbag_menuTab li:first-child {margin-left:0}
+#fidbag_tabList {padding-top:25px}
+#fidbag_submit_connect_result,#createFidbagAccount {margin-left:10px}
+.fidbag_tabList {display:none}
+.fidbag_tabList.selected {display:block;background:#FEF6DD;border:none;border-top:1px solid #CCCCCC;padding:10px}
+.div_form_fidbag {display:block;line-height:28px}
+.div_form_fidbag label {margin:0 10px 0 0 !important;padding:0}
+.div_form_fidbag input {background:none repeat scroll 0 0 white;border:1px solid gray;color:black;padding:3px;margin:2px}
+.div_form_fidbag.submit-block {text-align:center}
+.div_form_fidbag input[type=submit] {margin: 10px auto !important}
+.fidbag_tabList label {width:200px;text-align:right;float:left;margin:2px;font-size:12px}
+.fidbag_button {background:none repeat scroll 0 0 #D10452 !important;border:1px solid #B10432 !important;color: white !important; font-weight: bold; padding: 3px 10px !important}
+.fidbag_rebate {background:none repeat scroll 0 0 #FEF6DD;border:none;border-top:1px solid #BBB;padding:10px;margin-top:10px}
+.fidbag_discount_input{margin-left:10px;width:30px;background: none repeat scroll 0 0 white;border: 1px solid gray; color:black;margin:2px;padding:3px;}
+#fidbag_voucher_form.fidbag_rebate{display: none;}
+div.fidbag_rebate > h4 { margin-bottom:20px;}

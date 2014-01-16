@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2014 PrestaShop 
+* 2007-2013 PrestaShop 
 *
 * NOTICE OF LICENSE
 *
@@ -19,7 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2014 PrestaShop SA
+*  @copyright  2007-20131 PrestaShop SA
 *  @version  Release: $Revision: 9844 $
 *  @license	http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
@@ -30,71 +30,18 @@ require_once(dirname(__FILE__)."/class/fidbagWebService.php");
 require_once(dirname(__FILE__)."/class/fidbagUser.php");
 
 $cart = new Cart((int)Tools::getValue('cart'));
-$token = Tools::encrypt((int)Tools::getValue('customer'));
+$token = Tools::encrypt((int)Tools::getValue('customer').'-'.Configuration::get('FIDBAG_TOKEN'));
 
 if ((Tools::getValue('token') !== $token) || !Tools::getValue('login') || !Tools::getValue('password') || ((int)$cart->id_customer != (int)Tools::getValue('customer')))
 	die ("0");
 else
 {
 	$webService = new FidbagWebService();
-	
-	try
-	{
-		$return = $webService->action('LoginUserWithMerchantCodeAndExternalToken',
-			array('Login' => Tools::getValue('login'),
-				'Password' => Tools::getValue('password'),
-				'MerchantCode' => Configuration::get('FIDBAG_MERCHANT_CODE')),
-			array('Login' => Tools::getValue('login'),
-				'Password' => Tools::getValue('password'))
-		);
+	$arg = array('Login' => Tools::getValue('login'),
+		'Password' => Tools::getValue('password'),
+        'ExternalToken'=>Tools::getValue('password'),
+    'MerchantCode' => Configuration::get('FIDBAG_MERCHANT_CODE'));
 
-		if ($return != null && isset($return->LoginUserWithMerchantCodeAndExternalTokenResult))
-		{
-			$json_return = Tools::jsonDecode($return->LoginUserWithMerchantCodeAndExternalTokenResult);
-			
-			if ($json_return->returnInfos->mCode != 0)
-				echo Tools::jsonEncode($json_return->returnInfos);
-			else
-			{
-				$fidbag_user = new FidbagUser((int)Tools::getValue('customer'));
-				
-				if (!$fidbag_user->getFidBagUser())
-					$fidbag_user->createFidBagUser();
-
-				$fidbag_user->setIdCart((int)Tools::getValue('cart'));
-				$fidbag_cardnumber = $json_return->fidcardInformations->FidBagCardNumber;
-
-				if (empty($fidbag_cardnumber))
-				{
-					$create_temp_fidcard_arg = array(
-						'MerchantCode' => Configuration::get('FIDBAG_MERCHANT_CODE'),
-						'Email' => Tools::getValue('login')
-					);
-
-					$return_temp_fidcard_creation = $webService->action('CreateTempFidCard', $create_temp_fidcard_arg, $create_temp_fidcard_arg  );
-
-					if (($return_temp_fidcard_creation != null) && isset($return_temp_fidcard_creation->CreateTempFidCardResult))
-					{
-						$json_return = Tools::jsonDecode($return_temp_fidcard_creation->CreateTempFidCardResult);
-						$fidbag_cardnumber=  $json_return->CardNumber;
-					}
-					else
-						die(1);
-
-				}
-
-				$fidbag_user->setCartNumber($fidbag_cardnumber);
-				$fidbag_user->setPayed(false);
-				$fidbag_user->setLoginPassword(Tools::getValue('login'), Tools::getValue('password'));
-				
-				die($return->LoginUserWithMerchantCodeAndExternalTokenResult);
-			}
-		}
-		else
-			die ("0");
-	}
-	catch (Exception $e)
-	{
-		die($e->getMessage());
-	}
+   die( $webService->LoginFidbag($arg,(int) Tools::getValue('customer'),(int)Tools::getValue('cart')));
+  		
 }

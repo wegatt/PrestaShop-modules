@@ -1,3 +1,28 @@
+{*
+* 2007-2014 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Academic Free License (AFL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/afl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author PrestaShop SA <contact@prestashop.com>
+*  @copyright  2007-2014 PrestaShop SA
+*  @version  Release: $Revision: 9844 $
+*  @license	http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*}
 <h2><a target="_blank" href="http://www.fidbag.com/"><img style="width:100px" src="{$glob.path}logo.jpg" alt="{l s='Fid\'Bag' mod='fidbag'}" /></a></h2>
 {foreach from=$error item=message}
 <div class="error"><img src="{$glob.img}admin/forbbiden.gif" alt="nok" /> {$message}</div>
@@ -45,15 +70,25 @@
 		
 		<h4>{l s='Fid\'bag Account' mod='fidbag'} :</h4>
 		
-		<label>{l s='Test environment' mod='fidbag'} : </label>
+		<label>{l s='Mode' mod='fidbag'} : </label>
 		<div class="margin-form">
-			<input type="radio" name="fidbag_environment" value="1" {($merchant.test_environment == true) ? 'checked="checked"' : ''} /> <img src="../img/admin/enabled.gif" />
-			<input type="radio" name="fidbag_environment" value="0" {($merchant.test_environment == false) ? 'checked="checked"' : ''}/> <img src="../img/admin/disabled.gif" />
+			<table>
+			<tr><td><input type="radio" name="fidbag_environment" value="1" {($merchant.test_environment == true) ? 'checked="checked"' : ''} /></td>
+			<td><img src="../img/admin/disabled.gif" /></td><td>{l s='Test' mod='fidbag'}</td></tr><tr><td>
+		<input type="radio" name="fidbag_environment" value="0" {($merchant.test_environment == false) ? 'checked="checked"' : ''}/></td><td> <img src="../img/admin/enabled.gif" /></td><td>{l s='Reel' mod='fidbag'}</td></tr>
+		</table>
 		</div>
 		
 		<label>{l s='Merchant code' mod='fidbag'} : </label>
-		<div class="margin-form"><input type="text" size="20" name="fidbag_merchant_code" value="{$merchant.code|escape:'htmlall':'UTF-8'}" /></div>
-		
+		<div class="margin-form"><input type="text" size="20" name="fidbag_merchant_code" value="{$merchant.code|escape:'htmlall':'UTF-8'}" /><br /></div>
+            <label>{l s='Points are awarded when the order is' mod='fidbag'}</label>
+        <div class="margin-form">
+        <select id="fidbag_order_state" name="fidbag_order_state">';
+                {foreach from=$order_states item=order_state}
+                    <option value="{$order_state['id_order_state']}"    {if $order_state_trigger eq $order_state['id_order_state']} selected="selected" {/if}  >{$order_state['name']}</option>
+                {/foreach}
+            </select>
+        </div>
 		<div class="margin-form"><input class="button" name="submitSave" type="submit" value={l s='Save' mod='fidbag'}></div>
 	</fieldset>
 </form>

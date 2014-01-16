@@ -19,15 +19,14 @@
 *
 *  @author PrestaShop SA <contact@prestashop.com>
 *  @copyright  2007-2014 PrestaShop SA
-*  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*  @version  Release: $Revision: 9844 $
+*  @license	http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 <p id="loyalty" class="align_justify">
 	{if $points}
 		{l s='By buying this product you can collect up to' mod='fidbag'} <b><span id="loyalty_points">{$points}</span> 
 		{if $points > 1}{l s='loyalty points' mod='fidbag'}{else}{l s='loyalty point' mod='fidbag'}{/if}</b>. 
-		{l s='Your cart will total' mod='fidbag'} <b><span id="total_loyalty_points">{$total_points}</span> 
-		{if $total_points > 1}{l s='points' mod='fidbag'}{else}{l s='point' mod='fidbag'}{/if}</b>
 	{else}
 		{if isset($no_pts_discounted) && $no_pts_discounted == 1}
 			{l s='No reward points for this product because there\'s already a discount.' mod='fidbag'}

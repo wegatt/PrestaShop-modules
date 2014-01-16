@@ -43,7 +43,7 @@ class Fidbag extends Module
 	{
 		$this->name = 'fidbag';
 		$this->tab = 'pricing_promotion';
-		$this->version = '1.4';
+		$this->version = '1.3';
 		$this->author = 'PrestaShop';
 
 		parent::__construct();
@@ -192,12 +192,9 @@ class Fidbag extends Module
 
 	private function loadTPLVars($param)
 	{
-				$smarty = Context::getContext()->smarty;
-        $isLogged  = false;
-        if(_PS_VERSION_ < '1.5')
-            $isLogged=$this->context->cookie->isLogged();
-        else
-            $isLogged = $this->context->customer->isLogged();
+	    $smarty = Context::getContext()->smarty;
+        $isLogged=$this->context->cookie->isLogged();
+
 
 			$var = array('path' => $this->_path,
 						 'tab' => Tools::safeOutput(Tools::getValue('tab')),

@@ -27,7 +27,7 @@
     fidbagModule.messages.technical ="{l s='Technical error, please try later' mod='fidbag'}";
     fidbagModule.messages.error ="{l s='Error' mod='fidbag'}";
     fidbagModule.messages.emailSent= "{l s='A mail has been sent' mod='fidbag'}";
-    fidbagModule.messages.loginError="{l s='Indiquer votre Login' mod='fidbag'}";
+    fidbagModule.messages.loginError="{l s='Enter your Email' mod='fidbag'}";
     fidbagModule.messages.discountAmountIncoherence= "{l s='The total amount of rebate cannot be greater than' mod='fidbag'}";
     fidbagModule.messages.userNotVerified= "{l s='User cannot be verified' mod='fidbag'}";
     fidbagModule.messages.passwordNotTheSame="{l s='Passwords are required and must be the same' mod='fidbag'}";
